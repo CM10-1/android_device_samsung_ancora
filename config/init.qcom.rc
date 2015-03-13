@@ -66,19 +66,19 @@ on boot
     chown root system /proc/net/ip_conntrack
 
     # accelerometer
-    chown system input /sys/class/input/input4/enable
-    chown system input /sys/class/input/input4/delay
-    chown system input /sys/class/input/input4/position
-    chown system input /sys/class/input/input4/threshold
-    chown system input /sys/class/input/input4/wake
-    chown system input /sys/class/input/input4/data
-    chown system input /sys/class/input/input4/calibration
+    chown system input /sys/class/input/input3/enable
+    chown system input /sys/class/input/input3/delay
+    chown system input /sys/class/input/input3/position
+    chown system input /sys/class/input/input3/threshold
+    chown system input /sys/class/input/input3/wake
+    chown system input /sys/class/input/input3/data
+    chown system input /sys/class/input/input3/calibration
 
     # proximity
-    chown system input /sys/class/input/input5/enable
-    chown system input /sys/class/input/input5/delay
-    chown system input /sys/class/input/input5/wake
-    chown system input /sys/class/input/input5/data
+    chown system input /sys/class/input/input4/enable
+    chown system input /sys/class/input/input4/delay
+    chown system input /sys/class/input/input4/wake
+    chown system input /sys/class/input/input4/data
 
     chown system system /sys/devices/platform/msm_sdcc.1/polling
     chown system system /sys/devices/platform/msm_sdcc.2/polling
@@ -116,9 +116,6 @@ on boot
     chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_phone
     chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_threshold
 
-    # for jack control
-    chown system system /sys/class/jack/jack_selector/select_jack
-
     # Amp Tun (YDA165)
     chown system audio /sys/devices/virtual/misc/amp/mode
     chown system audio /sys/devices/virtual/misc/amp/in1_gain
@@ -145,8 +142,6 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpufreq/ondemand/boostpulse
     chown system system /sys/devices/system/cpu/cpufreq/ondemand/boosttime
     chmod 0664 /sys/devices/system/cpu/cpufreq/ondemand/boosttime
-    chown system system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chmod 0664 /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
     chown system system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
     chmod 0664 /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
     chown system system /sys/devices/system/cpu/cpufreq/ondemand/down_differential

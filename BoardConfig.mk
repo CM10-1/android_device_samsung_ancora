@@ -24,12 +24,17 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := true
+USE_DEVICE_SPECIFIC_CAMERA := true
 
 # inherit from the proprietary version
 -include vendor/samsung/ancora/BoardConfigVendor.mk
 
+# create the folder /usr to prevent the build from failing
+$(shell mkdir -p $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/)
+
 TARGET_BOARD_PLATFORM := msm7x30
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+BOARD_ALLOW_EGL_HIBERNATION := true
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -42,7 +47,8 @@ TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
 
 TARGET_ARCH_LOWMEM := true
 
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DNEW_ION_API
+COMMON_GLOBAL_CFLAGS += -DNEW_ION_API
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DBINDER_COMPAT
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_LEGACY
 
@@ -51,6 +57,11 @@ TARGET_OTA_ASSERT_DEVICE := ancora,GT-I8150
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
+
+# Bootanimation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+TARGET_BOOTANIMATION_USE_RGB565 := true
 
 TARGET_NO_INITLOGO := true
 
@@ -66,7 +77,6 @@ BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 BOARD_WLAN_DEVICE                := bcmdhd
 BOARD_HAVE_SAMSUNG_WIFI          := true
-
 WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_NAME          := "dhd"
 WIFI_DRIVER_MODULE_ARG           := "firmware_path=/vendor/firmware/fw_bcmdhd.bin nvram_path=/vendor/firmware/nvram_net.txt"
@@ -94,9 +104,11 @@ TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_HAVE_SAMSUNG_AUDIO := true
 BOARD_USES_QCOM_AUDIO_RESETALL := true
 BOARD_USES_QCOM_AUDIO_VOIPMUTE := true
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
 
 BOARD_EGL_CFG := device/samsung/ancora/config/egl.cfg
 
+TARGET_DISPLAY_INSECURE_MM_HEAP := true
 USE_OPENGL_RENDERER := true
 
 # QCOM webkit
@@ -110,14 +122,11 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_MEDIA_VARIANT := caf
 TARGET_USES_ION := true
-TARGET_USES_C2D_COMPOSITION := true
-
 BOARD_NEEDS_MEMORYHEAPPMEM := true
+TARGET_USES_C2D_COMPOSITION := true
 
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_GPS := true
-
-BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 # Camera stuff
 BOARD_USES_LEGACY_OVERLAY := true
@@ -162,6 +171,5 @@ TARGET_RECOVERY_FSTAB := device/samsung/ancora/recovery.fstab
 
 TARGET_KERNEL_SOURCE := kernel/samsung/msm7x30-common
 TARGET_KERNEL_CONFIG := ancora_defconfig
-TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/ancora/recovery/zImage
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
